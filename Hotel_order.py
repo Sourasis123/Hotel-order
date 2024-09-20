@@ -1,12 +1,22 @@
 menu = {
     "Pizza":50,
     "Pasta":40,
-    "Burgger":80,
+    "Burger":80,
     "Momo":30,
-    "Coffe":70,
+    "Coffee":70,
 }
+
+def add_item(menu, item, price):
+    menu[item] = price
+add_item(menu, "Sandwich", 60)
+
+
 print("Welcom to JANA Restaurant")
-print("Pizza: 50\nPasta: 40\nBurgger: 80\nMomo: 30\nCoffe: 70")
+# print("Pizza: 50\nPasta: 40\nBurger: 80\nMomo: 30\nCoffee: 70")
+
+for item, price in menu.items():
+    print(f"{item}: {price}")
+
 
 Order_total = 0
 
@@ -28,3 +38,4 @@ if another_order == "Yes":
         print(f"Ordered item {item_2}is not avaialable")
 
 print(f"The total amount of items is {Order_total}")
+
