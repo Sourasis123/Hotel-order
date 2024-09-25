@@ -7,41 +7,45 @@ menu = {
 }
 
 def add_item(menu, item, price):
+    """Add a new item to the menu"""
     menu[item] = price
 
 def display_menu(menu):
+    """Display the menu"""
+    print("\n--- JANA Restaurant Menu ---")
     for item, price in menu.items():
-        print(f"{item}: {price}")
+        print(f"{item}: ${price}")
 
+def take_order(menu):
+    """Take customer order"""
+    order_total = 0
+    ordered_items = []
 
-add_item(menu, "Sandwich", 60)
-
-print("Welcome to JANA Restaurant")
-
-# for item, price in menu.items():
-#     print(f"{item}: {price}")
-
-order_total = 0
-
-item_1 = input("Enter the name of the item you want to order: ")
-if item_1 in menu:
-    order_total = menu[item_1]
-    ordered_items = item_1
-    print(f"Your item '{item_1}' has been added to your order.")
-    
     while True:
-        another_order = input("Do you want to add another item? (Yes/No): ")
-        if another_order == "Yes":
-            item_2 = input("Enter the name of the second item: ")
-            if item_2 in menu:
-                order_total += menu[item_2]
-                ordered_items += " & " + item_2
-                print(f"Item '{item_2}' has been added to your order.")
-            else:
-                print(f"Ordered item '{item_2}' is not available.")
+        display_menu(menu)
+        item = input("Enter the name of the item you want to order: ")
+        if item in menu:
+            order_total += menu[item]
+            ordered_items.append(item)
+            print(f"Item '{item}' has been added to your order.")
         else:
+            print(f"Ordered item '{item}' is not available.")
+
+        another_order = input("Do you want to add another item? (Yes/No): ")
+        if another_order.lower() != "yes":
             break
 
-    print(f"The total amount for your order is {order_total}")
-else:
-    print("Please order something else that we can serve you.")
+    return order_total, ordered_items
+
+# Add a new item to the menu
+add_item(menu, "Sandwich", 60)
+
+# Welcome message and taking order
+print("Welcome to JANA Restaurant")
+
+order_total, ordered_items = take_order(menu)
+
+# Display the order summary
+print("\n--- Your Order ---")
+print(f"Items: {', '.join(ordered_items)}")
+print(f"Total: ${order_total}")
